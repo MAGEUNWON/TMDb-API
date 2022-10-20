@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script type="module" src="./TMDb.js" defer></script> -->
+</head>
+<body>
+  <div id = "root"></div>
+
+  <script>
+    
+    
+
+    function movie (startDate, endDate){
+        const api_KEY = '7204O8KH4D5547Q3JBB7';
+        const api_URL = ` https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${api_KEY}&detail=Y&listCount=50&releaseDts=${startDate}&releaseDte=${endDate}	`;
+        const request = new XMLHttpRequest();
+        request.open("GET", api_URL);
+        request.responseType = "json";
+        request.send();
+        request.addEventListener("load", ()=>{    
+          const data = request.response;
+          console.dir(data);
+          
+        });
+        
+    }
+    movie("20220919", "20221019");
+
+
+
+  </script>
+</body>
+</html>
