@@ -14,24 +14,50 @@
     
     
 
-    function movie (startDate, endDate){
+    function movie (startDate, genre){
         const api_KEY = '7204O8KH4D5547Q3JBB7';
-        const api_URL = ` https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${api_KEY}&detail=Y&listCount=50&releaseDts=${startDate}&releaseDte=${endDate}	`;
+        const api_URL = ` https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${api_KEY}&detail=Y&genre=${genre}&releaseDts=${startDate}&listCount=50`;
         const request = new XMLHttpRequest();
         request.open("GET", api_URL);
         request.responseType = "json";
         request.send();
         request.addEventListener("load", ()=>{    
-          const data = request.response;
+          const data = request.response.Data[0].Result;
           console.dir(data);
+          
+        for(let i = 0; i<10; i++){
+          class movieData{
+            constructor(title, repRlsDate, nation,rating, runtime, posters, genre, directors, codes, plots, actors){                 //directors, codes, plots, actors
+              this.title = title;
+              this.repRlsDate = repRlsDate;
+              this.nation = nation;
+              this.rating = rating;
+              this.runtime = runtime;
+              this.posters = posters;
+              this.genre = genre;
+              this.directors = directors;
+              this.codes = codes;
+              this.plots = plots;
+              this.actors = actors;
+            }         
+            
+            // get movieD(){
+            //   return `movieD(${this.directors})`
+            // }
+          }
+          
+          let moviedata = new movieData(data[i].title, data[i].repRlsDate, data[i].nation, data[i].rating, data[i].runtime, data[i].posters, data[i].genre, data[i].directors.director[0].directorNm, data[i].Codes.Code[0].CodeNo, data[i].plots.plot[0].plotText, data[i].actors.actor[0].actorNm);
+          console.log(moviedata);
+          
+        }
           
         });
         
     }
-    movie("20220919", "20221019");
+    movie("202208015", "SF");
 
-
-
+    // 어드벤처, 판타지
+    
   </script>
 </body>
 </html>
