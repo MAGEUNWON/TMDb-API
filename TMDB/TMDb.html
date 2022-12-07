@@ -22,7 +22,7 @@
         request.responseType = "json";
         request.send();
         request.addEventListener("load", ()=>{    
-          const data = request.response.Data[0].Result;
+          const data = request.response;
           console.dir(data);
           
         for(let i = 0; i<10; i++){
@@ -47,14 +47,14 @@
           }
           
           let moviedata = new movieData(data[i].title, data[i].repRlsDate, data[i].nation, data[i].rating, data[i].runtime, data[i].posters, data[i].genre, data[i].directors.director[0].directorNm, data[i].Codes.Code[0].CodeNo, data[i].plots.plot[0].plotText, data[i].actors.actor[0].actorNm);
-          console.log(moviedata);
+          // console.log(moviedata);
           
         }
           
         });
         
     }
-    movie("202208015", "SF");
+    movie("20200101", "느와르");
 
     // 어드벤처, 판타지
     
